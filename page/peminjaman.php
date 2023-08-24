@@ -72,12 +72,12 @@
                         <tr>
                             <td>2</td>
                             <td>11-11-2023</td>
-                            <td>Andika</td>
+                            <td>Rohim</td>
                             <td>Laptop</td>
                             <td>10</td>
                             <td>00-00-0000</td>
                             <td>
-                                <label for="" class="label label-danger">Belum</label>
+                                <label for="" class="label label-warning">Dipinjam</label>
                             </td>
                             <td>
                                 <a href="" class="btn btn-primary btn-sm">Konfirmasi</a>

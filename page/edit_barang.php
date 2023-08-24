@@ -1,9 +1,9 @@
 <div class="row">
-    <h2>Edit Barang</h2>
+    <h2>Edit Inventaris</h2>
     <hr>
     <div class="col-lg-4">
     <div class="panel panel-primary">
-        <div class="panel-heading">Edit Barang Inventaris</div>
+        <div class="panel-heading">Edit Inventaris</div>
             <div class="panel-body">    
                 <form action="">
                     <div class="form-group">

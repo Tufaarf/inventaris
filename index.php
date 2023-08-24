@@ -47,7 +47,8 @@
             <li class=""><a href="#">Beranda</a></li>
             <li><a href="?p=list_barang">Daftar Inventaris</a></li>
             <li><a href="?p=peminjaman">Peminjaman</a></li>
-            <li><a href="#contact">Pengembalian</a></li>
+            <li><a href="?p=pengembalian">Pengembalian</a></li>
+            <li><a href="#contact">Laporan</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -86,6 +87,13 @@
 
             case 'peminjaman':
                 include "page/peminjaman.php";
+                break;
+
+            case 'pengembalian':
+                include "page/pengembalian.php";
+                break;
+            case 'detail_pengembalian':
+                include "page/detail_pengembalian.php";
                 break;
 
           default:

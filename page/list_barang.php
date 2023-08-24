@@ -8,7 +8,7 @@
         <button type="submit" class="btn btn-default">Cari</button>
       </form>
 <br><br>
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>No</th>
