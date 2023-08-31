@@ -1,3 +1,12 @@
+<?php
+  if (!empty($user)) {
+    ?>
+      <script type="text/javascript">
+        window.location.href ="?p=home";
+      </script>
+    <?php
+  }
+?>
 <style>
         body {
   padding-top: 40px;
@@ -41,16 +50,59 @@
 }
 
 </style>
-<form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+<form class="form-signin" method="post" action="">
+        <h2 class="form-signin-heading">Silahkan Login</h2>
+        <label for="inputEmail" name="username" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" name="masuk" type="submit">Masuk</button>
       </form>
+
+<?php
+  if(isset($_POST['masuk'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    
+
+    $sql = "SELECT * FROM petugas WHERE username = '$username'";
+    $query = mysqli_query($koneksi, $sql);
+    $cek = mysqli_num_rows($query);
+    
+    if ($cek > 0){
+      $data = mysqli_fetch_array($query);
+      $password = $password;
+      $pass_db = $data ['password'];
+
+      if ($password == $pass_db){
+        $_SESSION['username'] = $username;
+        $_SESSION['level'] = $data['id_level'];
+        ?>
+          <script type="text/javascript">
+            window.location.href="?p=home"
+          </script>
+        <?php
+      } else {
+        ?>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>MAAF!!!</strong> password yang anda masukan salah.
+        </div>
+      <?php
+      }
+
+    } else {  
+      ?>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>MAAF!!!</strong> Username atau password yang anda masukan salah.
+        </div>
+      <?php
+    }
+  }
+?>
