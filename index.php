@@ -1,13 +1,11 @@
 <?php
   session_start();
-  include "config/koneksi.php";
-  if (!empty($_SESSION['username'])) {
-    @$user = $_SESSION['username'];
-    @$level = $_SESSION['level'];
-
+  include "config/koneksi.php" ;
+  if(!empty($_SESSION['username'])){
+    $user = $_SESSION['username'];
+    $level = $_SESSION['level'];
   }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,49 +48,53 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Aplikasi Inventaris Kantor</a>
+          <a class="navbar-brand" href="#">Aplikasi Inventaris</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <?php
-              if (@$level == "1") {
+              if(@$level == "1"){
                 ?>
-                  <li><a href="?p=list_barang">Daftar Inventaris</a></li>
-                  <li><a href="?p=peminjaman">Peminjaman</a></li>
-                  <li><a href="?p=pengembalian">Pengembalian</a></li>
-                  <li><a href="?p=laporan">Laporan</a></li>
+                <li><a href="?p=list_barang">Daftar Inventaris</a></li>
+                <li><a href="?p=peminjaman">Peminjaman</a></li>
+                <li><a href="?p=pengembalian">Pengembalian</a></li>
+                <li><a href="?p=laporan">Laporan</a></li>
+                <?php
+              }
+            ?>
+             <?php
+              if(@$level == "2"){
+                ?>
+                <li><a href="?p=peminjaman">Peminjaman</a></li>
+                <li><a href="?p=pengembalian">Pengembalian</a></li>
                 <?php
               }
             ?>
             <?php
-               if (@$level == "2") {
+              if(@$level == "3"){
                 ?>
-                  <li><a href="?p=peminjaman">Peminjaman</a></li>
-                  <li><a href="?p=pengembalian">Pengembalian</a></li>
-              <?php
-               }
-            ?>
-            <?php
-               if (@$level == "3") {
-                ?>
-                  <li><a href="?p=peminjaman">Peminjaman</a></li>
-              <?php
-               }
-            ?>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <?php
-              if (!empty($user)) {
-                ?>
-                  <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $user ?></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="page/keluar.php">Keluar</a></li>
-              </ul>
-            </li>
+                <li><a href="?p=peminjaman1">Peminjaman</a></li>
                 <?php
               }
-            ?>
+              ?>
+           </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <?php
+              if(!empty($user)){
+                ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                      aria-expanded="false"><?= $user; ?> <span class="caret"></span>
+                    </a>
+                  <ul class="dropdown-menu">
+                     <li><a href="page/keluar.php">Keluar</a></li>
+                  </ul>
+                </li>
+                <?php
+              }
+              ?>
+
+            </ul>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -101,55 +103,65 @@
     <div class="container">
 
       <!-- Main component for a primary marketing message or call to action -->
-     
-      <?php
+      <?php 
 
-        if (!empty($_SESSION['username'])) {
-          $user = $_SESSION['username'];
-          $level = $_SESSION['level'];
-
-        @$p = $_GET['p'];
-        switch ($p) {
-          case 'login':
+      if(!empty($_SESSION['username'])){
+        $user = $_SESSION['username'];
+        $level = $_SESSION['level'];
+      
+      @$p = $_GET['p'];
+      switch ($p) {
+        case 'login':
             include "page/login.php";
             break;
-          
-            case 'list_barang':
-              include "page/list_barang.php";
-              break;
 
-            case 'tambah_barang':
-              include "page/tambah_barang.php";
-              break;
-              
-            case 'edit_barang':
-                include "page/edit_barang.php";
-                break;
-                
-            case 'peminjaman':
-                include "page/peminjaman.php";
-                break;
+        case 'list_barang':
+            include "page/list_barang.php";
+            break;
 
-            case 'pengembalian':
-                include "page/pengembalian.php";
-                break;
-                
-            case 'detail_pengembalian':
-                include "page/detail_pengembalian.php";
-                break;
-            case 'laporan':
-                include "page/laporan.php";
-                break;
-            case 'home':
-                include "page/home.php";
-                break;
-            case 'keluar':
-                include "page/keluar.php";
-                break;
-        }
-      } else {
-        include "page/login.php";
+        case 'tambah_barang':
+            include "page/tambah_barang.php";
+            break;
+
+        case 'edit_barang':
+            include "page/edit_barang.php";
+            break;
+
+        case 'peminjaman':
+            include "page/peminjaman.php";
+            break;   
+
+        case 'peminjaman1':
+            include "page/peminjaman1.php";
+            break;
+
+        case 'pengembalian':
+            include "page/pengembalian.php";
+            break; 
+
+        case 'detail_pengembalian':
+            include "page/detail_pengembalian.php";
+            break;
+
+        case 'laporan':
+            include "page/laporan.php";
+            break;
+
+        case 'home':
+            include "page/home.php";
+            break;
+
+        case 'hapus_barang.php':
+            include "page/home.php";
+            break;
+
+        default:
+            include "page/login.php";
+            break;
       }
+    }else{
+      include "page/login.php";
+    }
       ?>
 
     </div> <!-- /container -->
@@ -164,3 +176,10 @@
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+<script type="text/javascript" >
+  $(document).on('click', '#cetak', function(){
+    var tgl_awal = $("#tgl_awal").val();
+    var tgl_sampai = $("#tgl_sampai").val();
+    window.open('page/cetak_laporan.php?tgl_awal='+tgl_awal+"&tgl_sampai="+tgl_sampai, '_blank');
+  });
+</script>

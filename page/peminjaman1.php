@@ -90,7 +90,7 @@ $kodePeminjaman = $char . sprintf("%03s", $noUrut);
                         if($q_detail_pinjam){
                             ?>
                                 <script type="text/javascript">
-            window.location.href="?p=peminjaman";
+            window.location.href="?p=peminjaman1";
         </script>
                             <?php
                         }else{
@@ -118,7 +118,6 @@ $kodePeminjaman = $char . sprintf("%03s", $noUrut);
                             <th>jml</th>
                             <th>tgl.kembali</th>
                             <th>status</th>
-                            <th>opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,15 +151,6 @@ $kodePeminjaman = $char . sprintf("%03s", $noUrut);
                                                     echo " <label class='label label-warning'>Dipinjam</label> ";
                                                 }else{
                                                     echo " <label class='label label-success'>Dikembalikan</label> ";
-                                                }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                                if($data_d['status_peminjaman'] == '0'){
-                                                    ?>
-                                                    <a onclick="return confirm('Apakah anda yakin?')" href="page/proses_peminjaman.php?id_peminjaman=<?= $data_d['id_peminjaman']?>" class="btn btn-md-sm btn-primary" >Proses</a>
-                                                    <?php
                                                 }
                                             ?>
                                         </td>
